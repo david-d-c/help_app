@@ -1,6 +1,6 @@
 # Project Name
 
-> Project Mission Statement
+Help people
 
 ## Team
 
