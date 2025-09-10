@@ -13,6 +13,8 @@ const logRoutes = require('./middleware/logRoutes');
 const logErrors = require('./middleware/logErrors');
 
 // controller imports
+const postContollers = require('./controllers/postControllers')
+
 const authControllers = require('./controllers/authControllers');
 const userControllers = require('./controllers/userControllers');
 const app = express();
@@ -41,6 +43,12 @@ app.delete('/api/auth/logout', authControllers.logoutUser);
 app.get('/api/users', checkAuthentication, userControllers.listUsers);
 app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
+
+//Post Routes
+
+app.get('/api/post/:id', postContollers.viewPost)
+
+
 
 ///////////////////////////////
 // Fallback Routes

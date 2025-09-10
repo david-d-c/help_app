@@ -2,12 +2,6 @@
 
 Help people
 
-## Team
-
-  - teamMember: **Scrum Master, Developer**
-  - teamMember: **Developer**
-  - teamMember: **Developer**
-
 ## Table of Contents
 - [Getting Started](#getting-started)
   - [Build and Start Commands](#build-and-start-commands)
