@@ -51,6 +51,9 @@ app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 app.get('/api/post/:id', postContollers.viewPost)
 app.get('/api/allpost/', postContollers.viewAllPost)
 app.get('/api/userpost/:userid', postContollers.viewUserPost)
+app.post('/api/post/', postContollers.createPost)
+app.patch('/api/post/:id', postContollers.editPost)
+app.delete('/api/post/:id', postContollers.deletePost)
 
 
 ///////////////////////////////
