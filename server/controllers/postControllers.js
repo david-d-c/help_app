@@ -1,13 +1,32 @@
 const Post = require('../models/Post')
 
-//console.log(new Post(1,'post', 'answer'))
 
 exports.viewPost = async (req, res) => {
-    
     const { id } = req.params 
-    //console.log(typeof id)
+    
     let post = await Post.view(Number(id))
     
     res.send(post)
+}
+
+exports.viewAllPost = async (req, res) => {
+    let list = await Post.viewAll()
+
+    res.send(list)
+}
+
+exports.viewUserPost = async (req, res) => {
+    let { userId } = req.params
+    let list = await Post.viewPostFromUser(Number(userId))
+
+    res.send(list)
+}
+
+exports.editPostTitle = async (req, res) => {
+
+}
+
+exports.editPostPrice = async (req, res) => {
+    
 }
 

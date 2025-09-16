@@ -1,37 +1,51 @@
 const knex = require('../db/knex');
 
 class Post {
-    constructor(id, title,solution){
+    constructor(id, title,price){
         this.id = id
         this.title = title
-        this.solution = solution
+        this.price = this.price
     }
 
-    static async view(id){
-
+    static async view(id) {
         let query = `SELECT * FROM post WHERE id = ?`
        
         let res = await knex.raw(query, [id])
-        //let post = new Post(res.rows[0])
+
         return res.rows[0]
-
-
-        //   const result = await knex.raw(query, [username, passwordHash]);
-        
-        //     const rawUserData = result.rows[0];
-        //     return new User(rawUserData);
     }
 
-    static async upload(title, solution){
-        let query = `INSERT INTO post (title, solution) VALUES (?,?) RETURNING *`
-        let res = knex.raw(query, [title, solution])
+    static async viewAll() {
+        let query = `SELECT * FROM post`
+        let res = await knex.raw(query)
+
+        return res.rows
+    }
+
+    static async viewPostFromUser(userId) {
+        let query = `SELECT * FROM post WHERE user = ?`
+        let res = await knex.raw(query, [userId])
+
+        return res.rows
+    }
+
+    static async upload(title, price, userId){
+        let query = `INSERT INTO post (title, price, user_id) VALUES (?,?,?) RETURNING *`
+        let res = await knex.raw(query, [title, price, userId])
         
         return res
     }
 
-    static async editTitle(id,newTitle){
+    static async editTitle(postId,newTitle){
         let query = `UPDATE post SET title=? WHERE id=? RETURNING *`
-        let res = knex.raw(query, [newTitle, id])
+        let res = await knex.raw(query, [newTitle, postId])
+        
+        return res
+    }
+
+    static async editPrice(postId, newPrice){
+        let query = `UPDATE post SET price=? WHERE id=? RETURNING *`
+        let res = await knex.raw(query, [newPrice, postId])
         
         return res
     }

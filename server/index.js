@@ -44,10 +44,13 @@ app.get('/api/users', checkAuthentication, userControllers.listUsers);
 app.get('/api/users/:id', checkAuthentication, userControllers.showUser);
 app.patch('/api/users/:id', checkAuthentication, userControllers.updateUser);
 
-//Post Routes
+///////////////////////////////
+// Post Routes
+///////////////////////////////
 
 app.get('/api/post/:id', postContollers.viewPost)
-
+app.get('/api/allpost/', postContollers.viewAllPost)
+app.get('/api/userpost/:userid', postContollers.viewUserPost)
 
 
 ///////////////////////////////

@@ -6,7 +6,9 @@ exports.up = function(knex) {
     return knex.schema.createTable('post', (table) => {
         table.increments();
         table.string('title');
-        table.string('solution');
+        table.float('price');
+        table.integer('user_id').notNullable()
+        table.foreign('user_id').references('id').inTable('users')
     })
 };
 
@@ -14,6 +16,4 @@ exports.up = function(knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function(knex) {
-    knex.schema.dropTable('post')
-};
+exports.down = (knex) => knex.schema.dropTable('post');

@@ -15,5 +15,8 @@ exports.seed = async (knex) => {
   await User.create('l33t-guy', '1234');
   await User.create('wowow', '1234');
   
-  await Post.upload('Code Problem', 'solution')
+  await Post.upload('Code Problem', 2.99, 1)
+  await Post.upload('Problem', 5.00, 1)
+  await Post.upload('Situation', 4000.00, 2)
+
 };
