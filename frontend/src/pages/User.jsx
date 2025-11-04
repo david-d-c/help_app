@@ -4,6 +4,8 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
 import UpdateUsernameForm from "../components/UpdateUsernameForm";
+import { getUserPosts } from "../adapters/post-adapter";
+import PostItem from "../components/PostItem";
 
 export default function UserPage() {
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ export default function UserPage() {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -21,6 +24,14 @@ export default function UserPage() {
     };
 
     loadUser();
+  }, [id]);
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      const [data, err] = await getUserPosts(id);
+      if (!err && Array.isArray(data)) setPosts(data);
+    };
+    loadPosts();
   }, [id]);
 
   const handleLogout = async () => {
@@ -40,6 +51,16 @@ export default function UserPage() {
     <h1>{profileUsername}</h1>
     <p>If the user had any data, here it would be</p>
     <p>Fake Bio or something</p>
+    <h2>Posts</h2>
+    {posts.length === 0 ? (
+      <p>{profileUsername} has no listings</p>
+    ) : (
+      <ul>
+        {posts.map((post) => (
+          <PostItem key={post.id} post={post} />
+        ))}
+      </ul>
+    )}
     {
       isCurrentUserProfile ? (
         <>

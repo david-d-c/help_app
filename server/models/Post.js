@@ -24,7 +24,7 @@ class Post {
     }
 
     static async viewPostFromUser(userId) {
-        let query = `SELECT * FROM post WHERE user = ?`
+        let query = `SELECT * FROM post WHERE user_id = ?`
         let res = await knex.raw(query, [userId])
 
         return res.rows

@@ -1,8 +1,8 @@
 const Post = require('../models/Post')
 
 exports.createPost = async (req, res) => {
-    let { title, price, userId } = req.body
-    let newPost = await Post.upload(title, price, userId)
+    let { title, price, userid } = req.body
+    let newPost = await Post.upload(title, price, userid)
 
     res.send(newPost)
 }
@@ -22,8 +22,8 @@ exports.viewAllPost = async (req, res) => {
 }
 
 exports.viewUserPost = async (req, res) => {
-    let { userId } = req.params
-    let list = await Post.viewPostFromUser(Number(userId))
+    let { userid } = req.params
+    let list = await Post.viewPostFromUser(Number(userid))
 
     res.send(list)
 }
